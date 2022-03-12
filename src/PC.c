@@ -16,8 +16,8 @@ int main(int argc, char *argv[]){
     char line[MAX_STRING_SIZE];
     char *dni;
     char *token;
-    int mark;
-    int markNeeded = 10;
+    int mark, markNeeded = 10, numStudents = 0, totalMark = 0;
+    double average_mark = 0.0;
 
     if ((file = fopen(FILENAME, "r"))!= NULL){
         while (fgets(line, sizeof(line), file) != NULL) {
@@ -25,9 +25,12 @@ int main(int argc, char *argv[]){
             token = strtok(NULL, " ");
             token = strtok(NULL, " ");
             mark = markNeeded - atoi(token);
+            numStudents++;
+            totalMark+= mark;
             createFile(mark, dni);
         }
     fclose(file);
+    average_mark = ((double)totalMark)/((double)numStudents);
     }
         
     else{
