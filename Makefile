@@ -36,3 +36,4 @@ solution:
 clean : 
 	rm -rf *~ core $(DIROBJ) $(DIREXE) $(DIRHEA)*~ $(DIRSRC)*~
 	rm -r estudiantes
+	rm -f log.txt

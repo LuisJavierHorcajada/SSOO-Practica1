@@ -10,8 +10,13 @@ int createProcesses();
 
 int main(int argc, char *argv[]){
 
+    FILE *log;
+    log = fopen("./log.txt", "a");
+    fprintf(log, "\n******** Log del sistema ********\n");
     createDirectory();
-    createProcesses();
+    fprintf(log, "Creación de directorios finalizada.\n");
+    createProcesses(log);
+    fclose(log);
     return EXIT_SUCCESS; 
 }
 
@@ -32,7 +37,7 @@ int createDirectory(){
     }
 }
 
-int createProcesses(){
+int createProcesses(FILE *log){
 
     pid_t pid, pid2;
     int state, state2;
@@ -42,7 +47,9 @@ int createProcesses(){
     pid2 = createProcess("./exec/pc");
 
     waitpid(pid, &state, 0);
+    fprintf(log, "Copia de modelos de examen, finalizada.\n");
     waitpid(pid2, &state2, 0);
+    fprintf(log, "Creación de archivos con nota necesaria para alcanzar la nota de corte, finalizada.\n");
     cause = WIFEXITED(state);
     cause2 = WIFEXITED(state2);
 
