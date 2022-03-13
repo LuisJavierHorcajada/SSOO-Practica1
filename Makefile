@@ -7,7 +7,7 @@ CFLAGS := -I$(DIRHEA) -c -Wall -ansi
 LDLIBS := -lpthread -lrt
 CC := gcc
 
-all : dirs manager pa pb pc
+all : dirs manager pa pb pc pd
 
 dirs:
 	mkdir -p $(DIROBJ) $(DIREXE)
@@ -24,6 +24,9 @@ pb: $(DIROBJ)PB.o
 pc: $(DIROBJ)PC.o 
 	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
 
+pd: $(DIROBJ)PD.o 
+	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+
 $(DIROBJ)%.o: $(DIRSRC)%.c
 	$(CC) $(CFLAGS) $^ -o $@
 
@@ -35,5 +38,5 @@ solution:
 
 clean : 
 	rm -rf *~ core $(DIROBJ) $(DIREXE) $(DIRHEA)*~ $(DIRSRC)*~
-	rm -r estudiantes
 	rm -f log.txt
+	rm -r estudiantes

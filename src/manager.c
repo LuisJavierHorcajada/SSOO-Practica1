@@ -143,6 +143,8 @@ void installSignalHandler() {
 
 void signal_handler(int signo) {
 
+    pid_t pid;
+    int state;
     if(pid_a != 0)
         kill(pid_a, SIGINT);
     if(pid_b != 0)
@@ -152,5 +154,7 @@ void signal_handler(int signo) {
     fprintf(log, "Señal Ctrl + C recibida, el programa ha sido parado. \n");
     fflush(log);
     fclose(log);
+    pid = createProcess("./exec/pd");
+    waitpid(pid, &state, 0);
     exit(EXIT_SUCCESS);
 }

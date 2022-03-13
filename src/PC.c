@@ -21,6 +21,7 @@ int main(int argc, char *argv[]){
 
     if ((file = fopen(FILENAME, "r"))!= NULL){
         while (fgets(line, sizeof(line), file) != NULL) {
+            sleep(1);
             p_dni = strtok(line, " ");
             p_token = strtok(NULL, " ");
             p_token = strtok(NULL, " ");
