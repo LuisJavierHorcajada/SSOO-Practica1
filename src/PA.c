@@ -14,7 +14,7 @@ int main(int argc, char *argv[]){
     FILE *file;
 
     char line[MAX_STRING_SIZE];
-    char *dni;
+    char *p_dni;
     char dir_path [MAX_STRING_SIZE];
     struct stat st = {0};
 
@@ -24,8 +24,8 @@ int main(int argc, char *argv[]){
 
     if ((file = fopen(FILENAME, "r")) != NULL){
         while (fgets(line, sizeof(line), file) != NULL) {
-            dni = strtok(line, " "); 
-            sprintf(dir_path, "./estudiantes/%s", dni);
+            p_dni = strtok(line, " "); 
+            sprintf(dir_path, "./estudiantes/%s", p_dni);
             if (stat(dir_path, &st) == -1) {
                 mkdir(dir_path, 0700);
             }
@@ -34,9 +34,9 @@ int main(int argc, char *argv[]){
     }
         
     else{
-        printf("Error opening file");
+        return EXIT_FAILURE;
     }
     
     exit(0);
-    return 0;
+    return EXIT_SUCCESS;
 }

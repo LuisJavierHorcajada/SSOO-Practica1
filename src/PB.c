@@ -15,35 +15,32 @@ int main(int argc, char *argv[]){
     FILE *file;
 
     char line[MAX_STRING_SIZE];
-    char *dni;
-    char *token;
+    char *p_dni;
+    char *p_token;
 
     if ((file = fopen(FILENAME, "r"))!= NULL){
         while (fgets(line, sizeof(line), file) != NULL) {
-            dni = strtok(line, " ");
-            token = strtok(NULL, " ");
-            getExam(token, dni);
+            p_dni = strtok(line, " ");
+            p_token = strtok(NULL, " ");
+            getExam(p_token, p_dni);
         }
     fclose(file);
     }
         
     else{
-        printf("Error opening file");
     }
-    
-    exit(0);
-    return 0;
+    return EXIT_SUCCESS;
 }
 
-void getExam(char *letters, char *dni){
+void getExam(char *letters, char *p_dni){
 
     char letter = letters[0];
-    char sourceFile [MAX_STRING_SIZE];
-    char destFile [MAX_STRING_SIZE];
+    char source_file [MAX_STRING_SIZE];
+    char dest_file [MAX_STRING_SIZE];
 
-    sprintf(sourceFile, "./MODELOSEXAMEN/MODELO%c.pdf", letter);
-    sprintf(destFile, "./estudiantes/%s/MODELO%c.pdf", dni, letter);
-    copyFile(sourceFile, destFile);
+    sprintf(source_file, "./MODELOSEXAMEN/MODELO%c.pdf", letter);
+    sprintf(dest_file, "./estudiantes/%s/MODELO%c.pdf", p_dni, letter);
+    copyFile(source_file, dest_file);
 }
 
 int copyFile(char *sourceFile, char *destFile){
@@ -55,7 +52,7 @@ int copyFile(char *sourceFile, char *destFile){
         fclose(source);
         return EXIT_FAILURE;
     }
-    int n;
+    int n = 0;
     char buf [BUFSIZ];
 
     while ((n = fread(buf, 1, BUFSIZ, source)) > 0) {
