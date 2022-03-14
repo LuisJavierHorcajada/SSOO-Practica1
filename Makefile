@@ -7,7 +7,7 @@ CFLAGS := -I$(DIRHEA) -c -Wall -ansi
 LDLIBS := -lpthread -lrt
 CC := gcc
 
-all : dirs manager pa pb pc pd
+all : dirs manager pa pb pc pd daemon
 
 dirs:
 	mkdir -p $(DIROBJ) $(DIREXE)
@@ -26,6 +26,10 @@ pc: $(DIROBJ)PC.o
 
 pd: $(DIROBJ)PD.o 
 	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+
+daemon: $(DIROBJ)daemon.o 
+	$(CC) -o $(DIREXE)$@ $^ $(LDLIBS)
+
 
 $(DIROBJ)%.o: $(DIRSRC)%.c
 	$(CC) $(CFLAGS) $^ -o $@
