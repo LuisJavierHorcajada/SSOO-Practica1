@@ -91,7 +91,7 @@ int createProcesses(){
     /* Method that creates PB and PC concurrently */
 
     int state, state2;
-    int cause, cause2;
+    int cause = 1, cause2 = 1;
     bool isDone = false, isDone2 = false;
     double average_mark = 0.0;
     int pipe2 [2];
