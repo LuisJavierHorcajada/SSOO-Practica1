@@ -30,6 +30,7 @@ int main(int argc, char *argv[]){
     fprintf(log, "\n******** Log del sistema ********\n");
     createDirectory();
     createProcesses();
+    fprintf(log, "FIN DEL PROGRAMA\n");
     fclose(log);
     return EXIT_SUCCESS; 
 }
