@@ -1,3 +1,6 @@
+/* This is the implementation of PC which is in charge of 
+adding a .txt file into the students directory with the mark needed */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -5,11 +8,14 @@
 #include <unistd.h>
 #include <string.h>
 
+
 #define MAX_STRING_SIZE 100
 #define FILENAME "./estudiantes_p1.text"
 
 int createFile(int, char*);
+
 int main(int argc, char *argv[]){
+    /* Main method of PC */
 
     FILE *file;
 
@@ -21,17 +27,16 @@ int main(int argc, char *argv[]){
 
     if ((file = fopen(FILENAME, "r"))!= NULL){
         while (fgets(line, sizeof(line), file) != NULL) {
-            sleep(1);
             p_dni = strtok(line, " ");
             p_token = strtok(NULL, " ");
             p_token = strtok(NULL, " ");
             mark = mark_needed - atoi(p_token);
             num_students++;
             total_mark += atoi(p_token);
-            createFile(mark, p_dni);
+            createFile(mark, p_dni);       /* Opens students file and extracts their mark */ 
         }
     fclose(file);
-    average_mark = ((double)total_mark)/((double)num_students);
+    average_mark = ((double)total_mark)/((double)num_students); /* Calculates average and sends it to manager */
     sprintf(msg, "%f", average_mark);
     write(atoi(argv[0]), msg, strlen(msg)+1);
     }
@@ -43,6 +48,7 @@ int main(int argc, char *argv[]){
 }
 
 int createFile(int mark, char *dni){
+    /* Method that creates file in the student directory */
 
     FILE *file;
     char dest_file [MAX_STRING_SIZE];
